@@ -1,3 +1,5 @@
 .DS_Store
-*.ipynb
 .ipynb_checkpoints
+*.ipynb
+__pycache__
+downloads/
