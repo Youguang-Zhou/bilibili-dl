@@ -13,7 +13,7 @@ def get_args():
 
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--save-dir', default='Downloads', help='保存目录')
+    parser.add_argument('--save-dir', default='.', help='保存目录')
 
     args = parser.parse_args()
     return args

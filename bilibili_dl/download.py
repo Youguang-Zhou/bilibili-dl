@@ -9,7 +9,6 @@ from .utils import *
 
 
 def download(play_url, videos, up_name, save_dir):
-    os.makedirs(save_dir, exist_ok=True)
     for bvid, cid, title, cover_url in videos:
         params = {'fnval': '16', 'bvid': bvid, 'cid': cid}
         r = requests.get(play_url, params).json()
@@ -24,7 +23,7 @@ def download(play_url, videos, up_name, save_dir):
         # 封面名
         out_cover_fname = f'{save_dir}/{out_title}.{cover_url[-3:]}'
         if os.path.exists(out):
-            print(f'{out} already downloaded.')
+            print(f'{out_title} already downloaded at {os.path.abspath(out)}.')
             continue
         else:
             print(title)
