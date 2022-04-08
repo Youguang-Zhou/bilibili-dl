@@ -43,6 +43,7 @@ def download(play_url, videos, up_name, save_dir):
             subprocess.call(f'ffmpeg -i "{out_audio_fname}" -i "{out_cover_fname}" \
                                      -loglevel error                               \
                                      -map 0:0 -map 1:0                             \
+                                     -metadata album={out_title}                   \
                                      -metadata artist={up_name}                    \
                                      -metadata:s:v title="Album cover"             \
                                      -metadata:s:v comment="Cover (Front)"         \
