@@ -21,7 +21,7 @@ positional arguments:
   bvid                 BV号
 
 options:
-  -h, --help           show this help message and exit
+  -h, --help
   --mid MID            up主id
   --save-dir SAVE_DIR  保存目录
 ```
