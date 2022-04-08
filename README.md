@@ -12,6 +12,8 @@ pip install bilibili-dl
 
 ## 3. 使用
 
+所需依赖：[ffmpeg](https://ffmpeg.org)
+
 ```
 bilibili-dl [-h] [--mid MID] [--save-dir SAVE_DIR] [bvid]
 
@@ -38,7 +40,7 @@ bilibili-dl [--mid MID]
 
 ## 4. 感谢
 
-感谢一下项目提供的支持：
+感谢以下项目提供的支持：
 
 - [SocialSisterYi/bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
