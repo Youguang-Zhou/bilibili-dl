@@ -1,7 +1,7 @@
 import argparse
 
-from download import download
-from utils import *
+from .download import download
+from .utils import *
 
 URL_SPACE = 'https://api.bilibili.com/x/space/arc/search'
 URL_VIDEO_INFO = 'https://api.bilibili.com/x/web-interface/view'

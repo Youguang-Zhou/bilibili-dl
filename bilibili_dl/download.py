@@ -5,7 +5,7 @@ import urllib.request
 
 import requests
 
-from utils import *
+from .utils import *
 
 
 def download(play_url, videos, up_name, save_dir):

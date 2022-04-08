@@ -1,4 +1,4 @@
-from bilibili_dl import get_args, main
+from .bilibili_dl import get_args, main
 
 
 def run_cli():
