@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from .download import download
 from .utils import *
@@ -15,7 +16,12 @@ def get_args():
     parser.add_argument('--mid', help='up主id')
     parser.add_argument('--save-dir', default='.', help='保存目录')
 
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit()
+
     args = parser.parse_args()
+
     return args
 
 
