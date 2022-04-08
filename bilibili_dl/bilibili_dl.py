@@ -8,6 +8,17 @@ URL_VIDEO_INFO = 'https://api.bilibili.com/x/web-interface/view'
 URL_PLAY = 'https://api.bilibili.com/x/player/playurl'
 
 
+def get_args():
+    parser = argparse.ArgumentParser('Bilibili Downloader')
+
+    parser.add_argument('bvid', nargs='?', help='BV号')
+    parser.add_argument('--mid', help='up主id')
+    parser.add_argument('--save-dir', default='downloads', help='保存目录')
+
+    args = parser.parse_args()
+    return args
+
+
 def main(args):
     bvid = args.bvid
     mid = args.mid
@@ -35,12 +46,5 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('Bilibili Downloader')
-
-    parser.add_argument('bvid', nargs='?', help='BV号')
-    parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--save-dir', default='downloads', help='保存目录')
-
-    args = parser.parse_args()
-
+    args = get_args()
     main(args)
