@@ -8,7 +8,7 @@ import requests
 from .utils import *
 
 
-def download(play_url, videos, up_name, save_dir):
+def download(play_url, videos, up_name):
     for bvid, cid, title, cover_url in videos:
         params = {'fnval': '16', 'bvid': bvid, 'cid': cid}
         r = requests.get(play_url, params).json()
@@ -19,11 +19,11 @@ def download(play_url, videos, up_name, save_dir):
         # 处理特殊字符：/ 和 \
         out_title = re.sub(r'[/\\]', ' ', out_title)
         # 最终的文件名
-        out = f'{save_dir}/{out_title}.mp3'
+        out = f'{out_title}.mp3'
         # 未处理的音频名
-        out_audio_fname = f'{save_dir}/{out_title}.raw.mp3'
+        out_audio_fname = f'{out_title}.raw.mp3'
         # 封面名
-        out_cover_fname = f'{save_dir}/{out_title}.{cover_url[-3:]}'
+        out_cover_fname = f'{out_title}.{cover_url[-3:]}'
         if os.path.exists(out):
             print(f'{out_title} already downloaded at {os.path.abspath(out)}.')
             continue

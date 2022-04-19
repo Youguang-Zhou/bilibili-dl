@@ -14,7 +14,6 @@ def get_args():
 
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--save-dir', default='.', help='保存目录')
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -28,7 +27,6 @@ def get_args():
 def main(args):
     bvid = args.bvid
     mid = args.mid
-    save_dir = args.save_dir
     # 获取要下载视频的BV号
     bvids = []
     if bvid:
@@ -48,7 +46,7 @@ def main(args):
     # videos如：[(bvid, cid, title, pic), ...]
     videos, up_name = get_video_info_by_bvids(URL_VIDEO_INFO, bvids)
     # 开始下载！
-    download(URL_PLAY, videos, up_name, save_dir)
+    download(URL_PLAY, videos, up_name)
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ pip install bilibili-dl
 所需依赖：[ffmpeg](https://ffmpeg.org)
 
 ```
-bilibili-dl [-h] [--mid MID] [--save-dir SAVE_DIR] [bvid]
+bilibili-dl [-h] [--mid MID] [bvid]
 
 positional arguments:
   bvid                 BV号
@@ -23,7 +23,6 @@ positional arguments:
 options:
   -h, --help
   --mid MID            up主id
-  --save-dir SAVE_DIR  保存目录
 ```
 
 - 通过 BV 号下载单个视频的音频：
