@@ -47,7 +47,7 @@ def get_video_info_by_bvids(video_info_url, bvids):
     根据BV号获取视频详细信息(bvid, cid, title, pic)
     '''
     try:
-        print('Getting video info:')
+        print('[bilibili-dl] 获取视频详细信息中...')
         if type(bvids) == str:
             bvids = [bvids]
         videos = []
