@@ -16,6 +16,8 @@ def download(play_url, videos, up_name, save_dir):
         # 如果标题里有书名号，则提取书名号里的内容作为新标题，否则保持原标题不变
         out_title = re.search(r'\《(.+)\》', title)
         out_title = out_title.group(1) if out_title else title
+        # 处理特殊字符：/ 和 \
+        out_title = re.sub(r'[/\\]', ' ', out_title)
         # 最终的文件名
         out = f'{save_dir}/{out_title}.mp3'
         # 未处理的音频名
