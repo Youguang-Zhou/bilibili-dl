@@ -1,32 +1,30 @@
-import argparse
+from argparse import ArgumentParser, BooleanOptionalAction
 import sys
 
-from .downloader import download
-from .utils import *
-
-URL_SPACE = 'https://api.bilibili.com/x/space/arc/search'
-URL_VIDEO_INFO = 'https://api.bilibili.com/x/web-interface/view'
-URL_PLAY = 'https://api.bilibili.com/x/player/playurl'
+from src.downloader import download
+from src.utils import *
 
 
 def get_args():
-    parser = argparse.ArgumentParser('Bilibili Downloader')
+    parser = ArgumentParser('Bilibili Downloader')
 
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
+    parser.add_argument('--audio-only', '-a',
+                        action=BooleanOptionalAction, default=False, help='仅下载音频')
 
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit()
-
-    args = parser.parse_args()
-
-    return args
+    else:
+        return parser.parse_args()
 
 
 def main(args):
     bvid = args.bvid
     mid = args.mid
+    is_audio_only = args.audio_only
+
     # 获取要下载视频的BV号
     bvids = []
     if bvid:
@@ -37,16 +35,17 @@ def main(args):
             bvids.append(bvid)
     elif mid:
         # 否则根据mid下载该up主的所有投稿视频
-        bvids = get_all_bvids_by_mid(URL_SPACE, mid)
+        bvids = get_all_bvids_by_mid(mid)
         if len(bvids) == 0:
             raise Exception('mid输入有误')
     else:
         raise Exception('使用-h查看帮助')
-    # 通过BV号获取视频信息
-    # videos如：[(bvid, cid, title, pic), ...]
-    videos, up_name = get_video_info_by_bvids(URL_VIDEO_INFO, bvids)
+
+    # 通过BV号获取视频信息，videos如：[(bvid, cid, title, up_name, pic), ...]
+    videos = get_video_info_by_bvids(bvids)
+
     # 开始下载！
-    download(URL_PLAY, videos, up_name)
+    download(videos, is_audio_only)
 
 
 if __name__ == '__main__':
