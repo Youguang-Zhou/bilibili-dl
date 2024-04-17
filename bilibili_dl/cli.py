@@ -1,4 +1,4 @@
-from src.main import *
+from .main import *
 
 
 def run_cli():

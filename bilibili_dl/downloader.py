@@ -3,7 +3,7 @@ import re
 import subprocess
 import urllib.request
 
-from src.utils import *
+from .utils import *
 
 
 def download(videos, is_audio_only):
@@ -12,8 +12,8 @@ def download(videos, is_audio_only):
         if is_audio_only:
             params['fnval'] = '16'  # dash格式
         else:
-            params['fnval'] = '1'   # mp4格式
-            params['qn'] = '64'     # 720P画质
+            params['fnval'] = '1'  # mp4格式
+            params['qn'] = '64'  # 720P画质
 
         # 发送请求
         res = send_request(URL_PLAY, params)
@@ -54,20 +54,26 @@ def download(videos, is_audio_only):
             # 添加封面到音频上
             print(f'[ffmpeg] 正在合并封面中...')
             if is_audio_only:
-                subprocess.call(f'ffmpeg -i "{raw_fname}" -i "{cover_fname}"     \
+                subprocess.call(
+                    f'ffmpeg -i "{raw_fname}" -i "{cover_fname}"                 \
                                          -loglevel error                         \
                                          -map 0:0 -map 1:0                       \
                                          -metadata album="{title}"               \
                                          -metadata artist="{up_name}"            \
                                          -metadata:s:v title="Album cover"       \
                                          -metadata:s:v comment="Cover (Front)"   \
-                                         -id3v2_version 3 -write_id3v1 1 "{final_fname}"', shell=True)
+                                         -id3v2_version 3 -write_id3v1 1 "{final_fname}"',
+                    shell=True,
+                )
             else:
-                subprocess.call(f'ffmpeg -i "{raw_fname}" -i "{cover_fname}"     \
+                subprocess.call(
+                    f'ffmpeg -i "{raw_fname}" -i "{cover_fname}"                 \
                                          -loglevel error                         \
                                          -map 1 -map 0                           \
                                          -c copy                                 \
-                                         -disposition:0 attached_pic "{final_fname}"', shell=True)
+                                         -disposition:0 attached_pic "{final_fname}"',
+                    shell=True,
+                )
             os.remove(raw_fname)
             os.remove(cover_fname)
             print(f'[bilibili-dl] ✅ 下载完成: {os.path.abspath(final_fname)}')

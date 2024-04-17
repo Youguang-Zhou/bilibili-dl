@@ -1,8 +1,8 @@
-from argparse import ArgumentParser, BooleanOptionalAction
 import sys
+from argparse import ArgumentParser, BooleanOptionalAction
 
-from src.downloader import download
-from src.utils import *
+from .downloader import download
+from .utils import *
 
 
 def get_args():
@@ -10,8 +10,7 @@ def get_args():
 
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--audio-only', '-a',
-                        action=BooleanOptionalAction, default=False, help='仅下载音频')
+    parser.add_argument('--audio-only', '-a', action=BooleanOptionalAction, default=False, help='仅下载音频')
 
     if len(sys.argv) == 1:
         parser.print_help()

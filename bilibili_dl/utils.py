@@ -4,7 +4,6 @@ import progressbar
 import requests
 from tqdm import tqdm
 
-
 URL_SPACE = 'https://api.bilibili.com/x/space/wbi/arc/search'
 URL_VIDEO_INFO = 'https://api.bilibili.com/x/web-interface/view'
 URL_PLAY = 'https://api.bilibili.com/x/player/playurl'
@@ -46,7 +45,7 @@ def get_all_bvids_by_mid(mid):
         res = send_request(URL_SPACE, params)
         total_pages = res['page']['count']
         bvids = [v['bvid'] for v in res['list']['vlist']]
-        for page_num in range(2, math.ceil(total_pages/int(params['ps']))+1):
+        for page_num in range(2, math.ceil(total_pages / int(params['ps'])) + 1):
             params['pn'] = page_num
             res = send_request(URL_SPACE, params)
             bvids.extend(v['bvid'] for v in res['list']['vlist'])
@@ -66,11 +65,7 @@ def get_video_info_by_bvids(bvids):
         videos = []
         for bvid in tqdm(bvids):
             res = send_request(URL_VIDEO_INFO, params={'bvid': bvid})
-            videos.append((res['bvid'],
-                           res['cid'],
-                           res['title'],
-                           res['owner']['name'],
-                           res['pic']))
+            videos.append((res['bvid'], res['cid'], res['title'], res['owner']['name'], res['pic']))
         return videos
     except Exception:
         raise Exception('获取视频详细信息失败！')
