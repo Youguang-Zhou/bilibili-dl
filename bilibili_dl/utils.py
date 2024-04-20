@@ -63,9 +63,16 @@ def get_video_info_by_bvids(bvids):
         if type(bvids) == str:
             bvids = [bvids]
         videos = []
-        for bvid in tqdm(bvids):
+        for bvid in tqdm(bvids, leave=False):
             res = send_request(URL_VIDEO_INFO, params={'bvid': bvid})
-            videos.append((res['bvid'], res['cid'], res['title'], res['owner']['name'], res['pic']))
+            # 检查该视频是否为分p视频
+            if res['videos'] == 1:
+                videos.append((res['bvid'], res['cid'], res['title'], res['owner']['name'], res['pic']))
+            else:
+                # 分p列表
+                pages = res['pages']
+                for p in pages:
+                    videos.append((res['bvid'], p['cid'], p['part'], res['owner']['name'], p['first_frame']))
         return videos
     except Exception:
         raise Exception('获取视频详细信息失败！')
