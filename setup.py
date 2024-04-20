@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='bilibili-dl',
-    version='3.0.0',
+    version='3.1.0',
     description='Bilibili-dl 是一个下载B站音视频的工具（目前视频下载最高只支持720P）',
     long_description=long_description,
     long_description_content_type='text/markdown',
