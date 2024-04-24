@@ -15,20 +15,20 @@ pip install bilibili-dl
 所需依赖：[ffmpeg](https://ffmpeg.org)
 
 ```
-bilibili-dl [-h] 
+bilibili-dl [-h]
+            [-v]
             [--mid MID]
-            [--audio-only | -a]
-            [--version]
+            [--audio-only | --no-audio-only | -a]
             [bvid]
 
 positional arguments:
   bvid                  BV号
 
 options:
-  -h, --help            
+  -h, --help            查看帮助
+  -v, --version         查看版本号
   --mid MID             up主id
   --audio-only, -a      仅下载音频 (default: False)
-  --version             查看版本号
 ```
 
 - 通过 BV 号下载单个视频：

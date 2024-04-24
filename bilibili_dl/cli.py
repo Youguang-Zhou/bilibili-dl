@@ -2,4 +2,4 @@ from .main import *
 
 
 def run_cli():
-    main(get_args())
+    main(args=get_args())

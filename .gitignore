@@ -1,7 +1,5 @@
-.DS_Store
-.ipynb_checkpoints
-*.ipynb
-*.egg-info
-__pycache__
+__pycache__/
+*.egg-info/
 dist/
-downloads/
+
+.DS_Store

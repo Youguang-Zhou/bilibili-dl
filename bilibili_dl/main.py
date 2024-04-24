@@ -1,18 +1,18 @@
 import sys
 from argparse import ArgumentParser, BooleanOptionalAction
 
-from .downloader import download
-from .utils import *
+from .src.downloader import download
+from .src.utils import get_all_bvids_by_mid, get_videos_by_bvids
 from .version import __version__
 
 
 def get_args():
     parser = ArgumentParser('Bilibili Downloader')
+    parser.add_argument('-v', '--version', action='version', version=__version__, help='查看版本号')
 
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--audio-only', '-a', action=BooleanOptionalAction, default=False, help='仅下载音频')
-    parser.add_argument('--version', action='version', version=__version__)
+    parser.add_argument('--audio-only', '-a', action=BooleanOptionalAction, default=False, help='仅下载音频 (default: False)')
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -43,12 +43,11 @@ def main(args):
         raise Exception('使用-h查看帮助')
 
     # 通过BV号获取视频信息，videos如：[(bvid, cid, title, up_name, pic), ...]
-    videos = get_video_info_by_bvids(bvids)
+    videos = get_videos_by_bvids(bvids)
 
     # 开始下载！
     download(videos, is_audio_only)
 
 
 if __name__ == '__main__':
-    args = get_args()
-    main(args)
+    main(args=get_args())
