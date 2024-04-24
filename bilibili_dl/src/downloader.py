@@ -38,8 +38,8 @@ def download(videos: List[Video], is_audio_only: bool):
             title = video.title
 
         # 处理特殊字符
-        title = re.sub(r'[.:?/\\]', ' ', title)
-        title = re.sub(r'\s+', '_', title)
+        title = re.sub(r'[.:?/\\]', ' ', title).strip()
+        title = re.sub(r'\s+', ' ', title)
         # 最终的文件名
         final_fname = f'{title}.{ext}'
         # 未处理的文件名
