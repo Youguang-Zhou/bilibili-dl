@@ -3,6 +3,7 @@ from argparse import ArgumentParser, BooleanOptionalAction
 
 from .downloader import download
 from .utils import *
+from .version import __version__
 
 
 def get_args():
@@ -11,6 +12,7 @@ def get_args():
     parser.add_argument('bvid', nargs='?', help='BV号')
     parser.add_argument('--mid', help='up主id')
     parser.add_argument('--audio-only', '-a', action=BooleanOptionalAction, default=False, help='仅下载音频')
+    parser.add_argument('--version', action='version', version=__version__)
 
     if len(sys.argv) == 1:
         parser.print_help()

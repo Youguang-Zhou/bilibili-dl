@@ -1,11 +1,13 @@
 import setuptools
 
+from bilibili_dl.version import __version__
+
 with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
     name='bilibili-dl',
-    version='3.1.0',
+    version=__version__,
     description='Bilibili-dl 是一个下载B站音视频的工具（目前视频下载最高只支持720P）',
     long_description=long_description,
     long_description_content_type='text/markdown',

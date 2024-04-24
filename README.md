@@ -18,6 +18,7 @@ pip install bilibili-dl
 bilibili-dl [-h] 
             [--mid MID]
             [--audio-only | -a]
+            [--version]
             [bvid]
 
 positional arguments:
@@ -27,6 +28,7 @@ options:
   -h, --help            
   --mid MID             up主id
   --audio-only, -a      仅下载音频 (default: False)
+  --version             查看版本号
 ```
 
 - 通过 BV 号下载单个视频：
