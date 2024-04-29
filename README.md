@@ -50,8 +50,6 @@ bilibili-dl [--mid MID]
 
 - [SocialSisterYi/bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect)
 
-- [nuster1128/bilibiliAudioDownloader](https://github.com/nuster1128/bilibiliAudioDownloader.git)
-
 ## 5. License
 
 [Creative Commons Attribution-NonCommercial 4.0 International](LICENSE)
