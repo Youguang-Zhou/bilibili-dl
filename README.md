@@ -2,7 +2,7 @@
 
 ## 1. 简介
 
-Bilibili-dl 是一个下载 B 站音视频的工具（目前视频下载最高只支持720P）。
+Bilibili-dl 是一个下载 B 站音视频的工具（目前视频下载最高只支持 720P）。
 
 ## 2. 安装
 
@@ -15,20 +15,19 @@ pip install bilibili-dl
 所需依赖：[ffmpeg](https://ffmpeg.org)
 
 ```
-bilibili-dl [-h]
-            [-v]
-            [--mid MID]
-            [--audio-only | --no-audio-only | -a]
-            [bvid]
+bilibili-dl [-h] [-v]
+            [bv]
+            [--mid [MID]]
+            [--audio-only | -a]
 
 positional arguments:
-  bvid                  BV号
+  bv                BV号
 
 options:
-  -h, --help            查看帮助
-  -v, --version         查看版本号
-  --mid MID             up主id
-  --audio-only, -a      仅下载音频 (default: False)
+  -h, --help        show this help message and exit
+  -v, --version     查看版本号
+  --mid [MID]       space.bilibili.com/{mid}
+  --audio-only, -a  仅下载音频 (默认: False)
 ```
 
 - 通过 BV 号下载单个视频：
