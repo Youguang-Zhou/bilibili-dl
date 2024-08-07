@@ -2,14 +2,14 @@ import os
 import re
 import subprocess
 import urllib.request
-from typing import List
 
 from .constants import URL_DOWNLOAD
-from .utils import ProgressBar, send_request
+from .ProgressBar import ProgressBar
+from .utils import send_request
 from .Video import Video
 
 
-def download(videos: List[Video], is_audio_only: bool):
+def download(videos: list[Video], is_audio_only: bool):
     for video in videos:
 
         params = {'bvid': video.bvid, 'cid': video.cid}

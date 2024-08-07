@@ -1,5 +1,4 @@
-import sys
-from argparse import ArgumentParser, BooleanOptionalAction
+import argparse
 
 from .src.downloader import download
 from .src.utils import get_all_bvids_by_mid, get_videos_by_bvids
@@ -7,43 +6,47 @@ from .version import __version__
 
 
 def get_args():
-    parser = ArgumentParser('Bilibili Downloader')
+    parser = argparse.ArgumentParser('Bilibili Downloader')
     parser.add_argument('-v', '--version', action='version', version=__version__, help='查看版本号')
 
-    parser.add_argument('bvid', nargs='?', help='BV号')
-    parser.add_argument('--mid', help='up主id')
-    parser.add_argument('--audio-only', '-a', action=BooleanOptionalAction, default=False, help='仅下载音频 (default: False)')
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('bv', nargs='?', help='BV号')
+    group.add_argument('--mid', nargs='?', help='space.bilibili.com/{mid}')
 
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit()
-    else:
-        return parser.parse_args()
+    parser.add_argument(
+        '-a',
+        '--audio-only',
+        action='store_true',
+        default=False,
+        help='仅下载音频 (默认: False)',
+    )
+
+    return parser.parse_args()
 
 
 def main(args):
-    bvid = args.bvid
-    mid = args.mid
-    is_audio_only = args.audio_only
+    bv: str = args.bv
+    mid: str = args.mid
+    is_audio_only: bool = args.audio_only
 
     # 获取要下载视频的BV号
-    bvids = []
-    if bvid:
+    bv_list = []
+    if bv:
         # 如果命令行参数里有BV号，则通过该BV号下载单个视频
-        if len(bvid) != 12:
-            raise Exception('BV号输入有误')
+        if bv.startswith('BV') and len(bv) == 12:
+            bv_list.append(bv)
         else:
-            bvids.append(bvid)
+            raise Exception('BV号输入错误')
     elif mid:
         # 否则根据mid下载该up主的所有投稿视频
-        bvids = get_all_bvids_by_mid(mid)
-        if len(bvids) == 0:
-            raise Exception('mid输入有误')
+        bv_list = get_all_bvids_by_mid(mid)
+        if len(bv_list) == 0:
+            raise Exception('mid输入错误')
     else:
         raise Exception('使用-h查看帮助')
 
-    # 通过BV号获取视频信息，videos如：[(bvid, cid, title, up_name, pic), ...]
-    videos = get_videos_by_bvids(bvids)
+    # 通过BV号获取视频信息
+    videos = get_videos_by_bvids(bv_list)
 
     # 开始下载！
     download(videos, is_audio_only)

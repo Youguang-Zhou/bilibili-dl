@@ -1,7 +1,5 @@
 import math
-from typing import Dict, List
 
-import progressbar
 import requests
 from tqdm import tqdm
 
@@ -9,23 +7,7 @@ from .constants import URL_USER_SPACE, URL_VIDEO_INFO
 from .Video import Video
 
 
-class ProgressBar:
-    def __init__(self):
-        self.pbar = None
-
-    def __call__(self, block_num, block_size, total_size):
-        if self.pbar is None:
-            self.pbar = progressbar.ProgressBar(maxval=total_size)
-            self.pbar.start()
-
-        downloaded = block_num * block_size
-        if downloaded < total_size:
-            self.pbar.update(downloaded)
-        else:
-            self.pbar.finish()
-
-
-def send_request(url: str, params: Dict[str, str]):
+def send_request(url: str, params: dict[str, str]):
     '''
     发送get请求
     '''
@@ -47,10 +29,10 @@ def get_all_bvids_by_mid(mid: str):
             bvids.extend(v['bvid'] for v in res['list']['vlist'])
         return bvids
     except Exception:
-        raise Exception('获取BV号失败！')
+        raise Exception('get_all_bvids_by_mid执行失败')
 
 
-def get_videos_by_bvids(bvids: List[str]):
+def get_videos_by_bvids(bvids: list[str]):
     '''
     根据BV号获取视频详细信息(bvid, cid, title, up_name, pic)
     '''
@@ -86,4 +68,4 @@ def get_videos_by_bvids(bvids: List[str]):
                     )
         return videos
     except Exception:
-        raise Exception('获取视频详细信息失败')
+        raise Exception('get_videos_by_bvids执行失败')
