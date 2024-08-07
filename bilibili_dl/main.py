@@ -1,7 +1,7 @@
 import argparse
 
-from .src.downloader import download
-from .src.utils import get_all_bvids_by_mid, get_videos_by_bvids
+from .bilibili_dl.downloader import download
+from .bilibili_dl.utils import get_all_bvids_by_mid, get_videos_by_bvids
 from .version import __version__
 
 
